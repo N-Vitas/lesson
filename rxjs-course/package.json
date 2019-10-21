@@ -11,12 +11,15 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "fs": "0.0.1-security",
     "html-webpack-plugin": "^3.2.0",
     "webpack": "^4.39.2",
     "webpack-cli": "^3.3.7",
     "webpack-dev-server": "^3.8.0"
   },
   "dependencies": {
+    "file-saver": "^2.0.2",
+    "file-system": "^2.2.2",
     "rxjs": "^6.5.3",
     "synaptic": "^1.1.4"
   }

@@ -31,7 +31,6 @@ const mouseup = fromEvent(canvas, 'mouseup');
 const mouseout = fromEvent(canvas, 'mouseout');
 
 const ctx = customContext(canvas);
-console.log(ctx)
 const stream = mousedown.pipe(
     withLatestFrom(createInput(range), createInput(color), (_, lineWidth, strokeStyle) => ({lineWidth, strokeStyle})),
     switchMap(options => {
