@@ -166,11 +166,27 @@ func fileCreate(filename string) bool {
  * 15 входящих нейронов 4 исходящих нейронов
  */
 func createNetwork() {
-	n := neural.NewNetwork(625, []int{625, 650, 350, 10})
+	n := neural.NewNetwork(625, []int{625, 1250, 10})
 	n.RandomizeSynapses()
 	persist.ToFile(mozgFile, n)
 }
-
+func (s *NNContext) Weigth(w http.ResponseWriter, r *http.Request) {
+	setupResponse(&w)
+	result := Welcom{
+		"Neural Network Api",
+		1,
+	}
+	switch r.Method {
+	case "GET":
+		Write(persist.FromFile(mozgFile), w)
+		break
+	case "OPTIONS":
+		Write(result, w)
+		break
+	default:
+		NotAllowed(w)
+	}
+}
 func (s *NNContext) Default(w http.ResponseWriter, r *http.Request) {
 	setupResponse(&w)
 	result := Welcom{
@@ -180,7 +196,7 @@ func (s *NNContext) Default(w http.ResponseWriter, r *http.Request) {
 	sample := Sample{[]float64{}, []float64{}}
 	switch r.Method {
 	case "GET":
-		Write(result, w)
+		Write(s.neural, w)
 		break
 	case "OPTIONS":
 		Write(result, w)
