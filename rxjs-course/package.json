@@ -18,8 +18,10 @@
     "webpack-dev-server": "^3.8.0"
   },
   "dependencies": {
+    "brain.js": "^2.0.0-alpha.9",
     "file-saver": "^2.0.2",
     "file-system": "^2.2.2",
+    "mnist": "git+https://github.com/ApelSYN/mnist.git",
     "rxjs": "^6.5.3",
     "synaptic": "^1.1.4"
   }

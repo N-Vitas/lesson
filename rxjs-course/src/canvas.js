@@ -51,6 +51,7 @@ stream.subscribe(([from, to]) => {
     const { lineWidth, strokeStyle } = from.options;
     ctx.lineWidth = lineWidth;
     ctx.strokeStyle = strokeStyle;
+    ctx.lineCap='round';
     ctx.beginPath();
     ctx.moveTo(from.x, from.y);
     ctx.lineTo(to.x, to.y);

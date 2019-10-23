@@ -17,88 +17,24 @@
     <button class="btn" id="rxjs">Показать с RxJS</button>
     <button class="btn" id="double">Результат</button>
     <button class="btn" id="clear">Очистить</button>
+    <input type="color" id="color" value="#0005fc"/>
+    <div class="input-field">
+      <input type="range" min="1" max="20" value="15" id="range" />
+    </div>
     <div class="result"></div>
-    <hr>
   </div>
   <div class="card">
-    <div class="box">
+    <div class="picture">
       <label>Рисование</label>
       <canvas id="canvas"></canvas>
     </div>
-    <div class="box">
+    <div class="trumb">
       <label>Результат</label>
       <canvas id="neural"></canvas>
     </div>
     <div class="input-field">
-      <div class="box-radio">
-        <label>
-          <input class="with-gap" name="group1" type="radio" checked value="0" />
-          <span>0</span>
-        </label>
-      </div>
-      <div class="box-radio">
-        <label>
-          <input class="with-gap" name="group1" type="radio" value="1" />
-          <span>1</span>
-        </label>
-      </div>
-      <div class="box-radio">
-        <label>
-          <input class="with-gap" name="group1" type="radio" value="2" />
-          <span>2</span>
-        </label>
-      </div>
-      <div class="box-radio">
-        <label>
-          <input class="with-gap" name="group1" type="radio" value="3" />
-          <span>3</span>
-        </label>
-      </div>
-      <div class="box-radio">
-        <label>
-          <input class="with-gap" name="group1" type="radio" value="4" />
-          <span>4</span>
-        </label>
-      </div>
-      <div class="box-radio">
-        <label>
-          <input class="with-gap" name="group1" type="radio" value="5" />
-          <span>5</span>
-        </label>
-      </div>
-      <div class="box-radio">
-        <label>
-          <input class="with-gap" name="group1" type="radio" value="6" />
-          <span>6</span>
-        </label>
-      </div>
-      <div class="box-radio">
-        <label>
-          <input class="with-gap" name="group1" type="radio" value="7" />
-          <span>7</span>
-        </label>
-      </div>
-      <div class="box-radio">
-        <label>
-          <input class="with-gap" name="group1" type="radio" value="8" />
-          <span>8</span>
-        </label>
-      </div>
-      <div class="box-radio">
-        <label>
-          <input class="with-gap" name="group1" type="radio" value="9" />
-          <span>9</span>
-        </label>
-      </div>
-    </div>
-    <div class="input-field">
-      <input type="range" min="1" max="20" value="15" id="range" />
-    </div>
-    <div class="input-field box-radio">
-      <input type="color" value="#0005fc" id="color" />
-    </div>
-    <div class="input-field box-radio">
-      <code id="code"></code>
+        <label>Нейронная сеть</label>
+        <canvas id="visual"></canvas>
     </div>
   </div>
 </div>
