@@ -92,30 +92,56 @@ stream.subscribe(() => {
 cliclear.subscribe(() => {
     ctxc.clearRect(0,0,280,280);
     ctxn.clearRect(0,0,280,280);
+    // ctxv.clearRect(0,0, 500, 300);
 })
 stv.subscribe(o => {
-    console.log(o);
-    createCeil();
+    const d1 = o[0].length / 495;
+    const d2 = 495 / o[1].length;
+    const d3 = 495 / o[2].length;
+    const center = 50;
+    const bottom = 270;
+    o[1].forEach((e,i) => {
+        createCeil({ 
+            x: (d2 * i) + (d2 / 2),
+            y: center,
+            d: d2 / 2,
+            c: `#${('00000'+(rgbToHex((230 * e) % 255,(166 * e) % 255,(153 * e) % 255)).toString(16)).slice(-6)}`
+        });
+    });
+    o[2].forEach((e,i) => {
+        o[1].forEach((e,j) => {
+            createLine({ 
+                x1: (d2 * j) + (d2 / 2),
+                y1: center,
+                x2: (d3 * i) + (d3 / 2),
+                y2: bottom,
+                c: `#${('00000'+(rgbToHex((230 * e) % 255,(1 * e) % 255,(1 * e) % 255)).toString(16)).slice(-6)}`
+            });
+        });
+        createCeil({ 
+            x: (d3 * i) + (d3 / 2),
+            y: bottom,
+            d: d3 / 2,
+            c: `#${('00000'+(rgbToHex((230 * e) % 255,(1 * e) % 255,(1 * e) % 255)).toString(16)).slice(-6)}`
+        });
+    });
 });
 
-const createCeil = () => {
-    const clr = rgbToHex(38,166,153);
-    console.log(clr);
-    ctxv.lineWidth = 1;
-    ctxv.strokeStyle = `#${clr}`;
-    ctxv.fillStyle = `#${clr}`;
-    ctxv.lineCap='round';
+const createCeil = options => {
+    const { x, y, d, c } = options;
+    ctxv.fillStyle = c;
+    // ctxv.lineCap='round';
     ctxv.beginPath()
-    ctxv.arc(75,75,50,0,Math.PI*2,true);
-    ctxv.fill(); // *14
-    ctxv.moveTo(40, 140);
-    ctxv.lineTo(20, 40);
-    ctxv.lineTo(60, 100);
-    ctxv.lineTo(80, 20);
-    ctxv.lineTo(100, 100);
-    ctxv.lineTo(140, 40);
-    ctxv.lineTo(120, 140);
-    ctxv.closePath()
-    ctxv.stroke()
-    // ctxv.fill()
+    ctxv.arc(x,y,d,0,Math.PI*2,true);
+    ctxv.fill();
+}
+const createLine = options => {
+    const { x1, y1, x2, y2, c } = options;
+    ctxv.strokeStyle = c;
+    ctxv.lineWidth = 0.05;
+    ctxv.beginPath()
+    ctxv.moveTo(x1,y1);
+    ctxv.lineTo(x2,y2);
+    ctxv.closePath();
+    ctxv.stroke();
 }
