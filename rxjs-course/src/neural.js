@@ -92,7 +92,7 @@ stream.subscribe(() => {
 cliclear.subscribe(() => {
     ctxc.clearRect(0,0,280,280);
     ctxn.clearRect(0,0,280,280);
-    // ctxv.clearRect(0,0, 500, 300);
+    ctxv.clearRect(0,0, 500, 300);
 })
 stv.subscribe(o => {
     const d1 = o[0].length / 495;
