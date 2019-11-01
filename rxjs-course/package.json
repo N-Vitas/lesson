@@ -21,8 +21,11 @@
     "brain.js": "^2.0.0-alpha.9",
     "file-saver": "^2.0.2",
     "file-system": "^2.2.2",
+    "get-ssl-certificate": "^2.3.3",
     "mnist": "git+https://github.com/ApelSYN/mnist.git",
+    "request": "^2.88.0",
     "rxjs": "^6.5.3",
-    "synaptic": "^1.1.4"
+    "synaptic": "^1.1.4",
+    "tls": "0.0.1"
   }
 }

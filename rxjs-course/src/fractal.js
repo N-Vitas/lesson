@@ -49,7 +49,7 @@ str.subscribe(() => {
     {
       for (let y2=-250; y2<=250; y2++)
       {
-            plotp(x2,y2,0, fract((x2+sx)/m,(y2+sy)/m, 0.42, 0.05, 500),0)
+            plotp(x2,y2,0, fract((x2+sx)/m,(y2+sy)/m, 0.38, 0.05, 500),0)
       }
     }
     context.putImageData(imgd, x, y);
