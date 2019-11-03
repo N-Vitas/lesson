@@ -92,7 +92,7 @@ export class Vector {
         return this.x*this.x+this.y*this.y;
     }
     distance(vec1, vec2) {
-        return vec1.subtract(vec2).length;
+        return vec1.subtract(vec2).length();
     }
     addScaled(a, f) {
         this.x += a.x * f;
@@ -131,9 +131,14 @@ Vector.cross = (a, b) => {
 	return a.x * b.y - a.y * b.x;
 };
 Vector.distance = (vec1, vec2) => {
-	if (vec1 instanceof Vector && vec2 instanceof Vector )
-    return vec1.subtract(vec2).length;
+	console.log(vec1 instanceof Vector , vec2 instanceof Vector)
+	if (vec1 instanceof Vector && vec2 instanceof Vector ) 
+	return vec1.subtract(vec2).length;
 };
+Vector.lengthSquared = (vec) => {
+	if (vec instanceof Vector) 
+	return Math.sqrt(vec.x*vec.x+vec.y*vec.y);
+}
 
 export class Ball {
     constructor(radius, color, pos, velo, canvas, ctx) {
@@ -141,6 +146,7 @@ export class Ball {
         this.color = color;
         this.pos2D = pos;
         this.velo2D = velo;
+        this.mass = Math.round(radius + radius / Math.PI*2);
         this.canvas = canvas;
         this.ctx = ctx;
     }
@@ -165,6 +171,12 @@ export class Ball {
 		return this;
 	}
 
+	isCollision(velo) {
+		const sum = this.radius + velo.radius;
+		const a = Vector.subtract(this.pos2D, velo.pos2D);
+		const dist = Vector.lengthSquared(a);
+		return dist <= sum;
+	}
 	revert() {
         if(this.pos2D.x - this.radius < 0) { this.velo2D.x *= -1; }
         if(this.pos2D.y - this.radius < 0) { this.velo2D.y *= -1; }
