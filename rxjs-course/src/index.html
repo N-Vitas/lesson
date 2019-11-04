@@ -12,7 +12,7 @@
 <body style="padding-top: 3rem;">
 
 <div class="container">
-  <div id="problem">
+  <div class="left" id="problem">
     <button class="btn" id="interval">Показать с интервалом</button>
     <button class="btn" id="rxjs">Показать с RxJS</button>
     <button class="btn" id="fractal">Фрактал с RxJS</button>
@@ -21,7 +21,16 @@
     <button class="btn" id="ball">Мячик</button>
     <input type="color" id="color" value="#0005fc"/>
     <div class="input-field">
-      <input type="range" min="1" max="20" value="15" id="range" />
+      <input type="range" min="1" max="20" value="5" id="range" />
+    </div>
+    <div class="input-field">
+      <input type="number" value="20" placeholder="x1" id="x1" />
+      <input type="number" value="30" placeholder="y1" id="y1" />
+      <input type="number" value="140" placeholder="x2" id="x2" />
+      <input type="number" value="200" placeholder="y2" id="y2" />
+      <input type="number" value="340" placeholder="collx2" id="collx2" />
+      <input type="number" value="210" placeholder="colly2" id="colly2" />
+      <button class="btn" id="addVector">Новый вектор</button>
     </div>
     <div class="result"></div>
   </div>

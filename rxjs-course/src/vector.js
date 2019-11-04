@@ -1,3 +1,5 @@
+import { basename } from "path";
+
 /* INSTANCE METHODS */
 export class Vector {
     constructor(x, y) {
@@ -98,7 +100,11 @@ export class Vector {
         this.x += a.x * f;
         this.y += a.y * f;
         return this;
-    }
+	}
+	rotate(ang) {
+		this.x = this.x * Math.cos(ang) - this.y * Math.sin(ang);
+		this.y = this.x * Math.sin(ang) + this.y * Math.cos(ang);
+	}
 };
 
 /* STATIC METHODS */
@@ -131,7 +137,6 @@ Vector.cross = (a, b) => {
 	return a.x * b.y - a.y * b.x;
 };
 Vector.distance = (vec1, vec2) => {
-	console.log(vec1 instanceof Vector , vec2 instanceof Vector)
 	if (vec1 instanceof Vector && vec2 instanceof Vector ) 
 	return vec1.subtract(vec2).length;
 };
@@ -139,6 +144,24 @@ Vector.lengthSquared = (vec) => {
 	if (vec instanceof Vector) 
 	return Math.sqrt(vec.x*vec.x+vec.y*vec.y);
 }
+Vector.vectorCalc = (a, b, F) => {
+	const vector = new Vector(0, 0);
+	if (a instanceof Vector && b instanceof Vector) {
+		const p = Vector.subtract(a,b);
+		const sm = F / (Math.abs(p.x) + Math.abs(p.y));
+		vector.set(sm * p.x, sm * p.y);
+	}
+	return vector;
+};
+Vector.rotate = (vec, ang) => {
+	if (vec instanceof Vector) {
+		vec.x = vec.x * Math.cos(ang) - vec.y * Math.sin(ang);
+		vec.y = vec.x * Math.sin(ang) + vec.y * Math.cos(ang);
+		return vec;
+	}
+	return new Vector(vec.x * Math.cos(ang) - vec.y * Math.sin(ang),
+	vec.x * Math.sin(ang) + vec.y * Math.cos(ang));
+};
 
 export class Ball {
     constructor(radius, color, pos, velo, canvas, ctx) {
@@ -176,6 +199,25 @@ export class Ball {
 		const a = Vector.subtract(this.pos2D, velo.pos2D);
 		const dist = Vector.lengthSquared(a);
 		return dist <= sum;
+	}
+
+	checkCollision(b) {
+		if (b instanceof Ball) {
+			const vd = Vector.subtract(this.velo2D,b.velo2D);
+			const d = Vector.subtract(b.pos2D, this.pos2D);
+			if(vd.x * d.x + vd.y * d.y >= 0) {
+				const a = -Math.atan2(b.pos2D.y - this.pos2D.y, b.pos2D.x - this.pos2D.x);
+				const m1 = this.mass;
+				const m2 = b.mass;
+				const u1 = Vector.rotate(this.velo2D, a);
+				const u2 = Vector.rotate(b.velo2D, a);
+				const v1 = new Vector(u1.x * (m1 - m2) / ((m1 + m2) + u2.x * 2 * m2 / (m1 + m2)), u1.y);
+				const v2 = new Vector(u2.x * (m1 - m2) / ((m1 + m2) + u1.x * 2 * m2 / (m1 + m2)), u2.y);
+				return { v1: Vector.rotate(v1, -a), v2: Vector.rotate(v2, -a) }
+			}
+			
+		}
+		return false;
 	}
 	revert() {
         if(this.pos2D.x - this.radius < 0) { this.velo2D.x *= -1; }

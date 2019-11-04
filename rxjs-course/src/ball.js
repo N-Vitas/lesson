@@ -55,49 +55,45 @@ cliclear.subscribe(() => {
 });
 const move = () => {
     context.clearRect(0, 0, visual.width, visual.height);
-// проверяем точки на соударение:
-// for (var i = points.length; --i >= 1 ;) {
-//     for (var j=i-1; j >= 0; j--) {
-//         var p1 = points[i];
-//         var p2 = points[j];
-//         var c1 = p1.coords;
-//         var c2 = p2.coords;
-//         var xx = c2.x-c1.x;
-//         var yy = c2.y-c1.y;
-//         var d = Math.sqrt(xx*xx + yy*yy);
-//         if (d <= p1.radius || d <= p2.radius) {
-//             var vector1 = p1.vector_multiplication(p1.mass / (p1.mass + p2.mass), p1.vector);
-//             var vector2 = p1.vector_multiplication(p2.mass / (p1.mass + p2.mass), p2.vector);
-//             p2.vector =  p2.vectors_sum(vector1, vector2);
-//             if (p1.mass > p2.mass) p2.coords = p1.coords;
-//             p2.mass = p1.mass + p2.mass;
-//             p2.radius = Math.round(Math.sqrt(Math.pow(p1.radius,2)+Math.pow(p2.radius,2)));
-//             points = points.slice(0, i).concat(points.slice(i + 1));
-//             for (var k=0; k < points.length; k++) points[k].points = points;
-//             break;
-//         };
-//     };
-
+    // расчёт суммарного вектора грав-х сил.
+    // balls.forEach((ball, i) => {
+    //     balls.forEach((velo, j) => {
+    //         if(i != j) {
+    //             console.log(ball.pos2D.x);
+    //             const d = Math.sqrt((velo.pos2D.x - ball.pos2D.x) * (velo.pos2D.x - ball.pos2D.x) + (velo.pos2D.y - ball.pos2D.y) * (velo.pos2D.y - ball.pos2D.y));
+    //             // расчёт силы взаимодействия:
+    //             const F = (ball.mass * velo.mass * 0.03) / (d*d);
+    //             // расчёт вектора силы:
+    //             const sumVector = Vector.vectorCalc(ball.pos2D, velo.pos2D, F);
+    //             const v = Vector.add(ball.pos2D, sumVector);
+    //             ball.pos2D.set(v.x, v.y);
+    //         }
+    //     })
+    // })
     for (let i = balls.length; --i >= 1 ;) {
         const ball = balls[i];
-        console.log(ball)
         for (let j=i-1; j >= 0; j--) {
             const velo = balls[j];
     // balls.forEach((ball, i) => {
     //     balls.forEach((velo, j) => {
-    //         if(i != j) {
-                if(ball.isCollision(velo)) {
-                    var vector1 = Vector.multiply(ball.pos2D, ball.mass / (ball.mass + velo.mass));
-                    var vector2 = Vector.multiply(velo.pos2D, velo.mass / (ball.mass + velo.mass));
-                    velo.pos2D.set(Vector.add(vector1, vector2));
-                    if (ball.mass > velo.mass) velo.pos2D.set(ball.pos2D);
-                    velo.mass = ball.mass + velo.mass;
-                    velo.radius = Math.round(Math.sqrt(Math.pow(ball.radius,2)+Math.pow(velo.radius,2)));
-                    const tmp = balls.slice(0, i).concat(balls.slice(i + 1));
-                    for (var k=0; k < tmp.length; k++) balls[k] = tmp;
-                    console.log('ball',tmp);
+            if(i != j) {
+                const b = ball.checkCollision(velo);
+                if(b) {
+                    console.log(b);
+                    // velo.velo2D.set(b.velo2D)
                 }
-            // }
+                // if(ball.isCollision(velo)) {
+                //     var vector1 = Vector.multiply(ball.pos2D, ball.mass / (ball.mass + velo.mass));
+                //     var vector2 = Vector.multiply(velo.pos2D, velo.mass / (ball.mass + velo.mass));
+                //     velo.pos2D.set(Vector.add(vector1, vector2));
+                //     if (ball.mass > velo.mass) velo.pos2D.set(ball.pos2D);
+                //     velo.mass = ball.mass + velo.mass;
+                //     velo.radius = Math.round(Math.sqrt(Math.pow(ball.radius,2)+Math.pow(velo.radius,2)));
+                //     // const tmp = balls.slice(0, i).concat(balls.slice(i + 1));
+                //     // for (var k=0; k < tmp.length; k++) balls[k] = tmp[k];
+                //     // console.log('ball',tmp);
+                // }
+            }
         }
         ball.move().drawBall();
     }

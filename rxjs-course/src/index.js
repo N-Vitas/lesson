@@ -3,6 +3,7 @@ import './problem';
 import './neural';
 import './fractal';
 import './ball';
+import './textVector';
 // import sslCertificate from './ssl';
 // sslCertificate.get('webterminal.test.tech24.kz', 250, 443, 'https:').then(function (certificate) {
 //     console.log(certificate)
