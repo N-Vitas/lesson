@@ -19,7 +19,7 @@ jobs:
       #   uses: docker/setup-buildx-action@v2
       -
         name: Build
-        uses: docker
+        uses: docker/build-push-action@v4
         with:
           context: .
           file: ./Dockerfile
