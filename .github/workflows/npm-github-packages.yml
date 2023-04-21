@@ -28,3 +28,4 @@ jobs:
           file: ./Dockerfile
           push: false
           tags: lesson/clockbox:latest
+          rune: docker built -t hello_go_http .
