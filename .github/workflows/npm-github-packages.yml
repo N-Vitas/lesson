@@ -14,4 +14,11 @@ jobs:
 #        with:
 #          node-version: 16
 #      - run: npm ci
-      - run: docker ps
+      -
+        name: Build
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./Dockerfile
+          push: false
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/clockbox:latest
