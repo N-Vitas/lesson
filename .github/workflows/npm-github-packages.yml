@@ -20,11 +20,24 @@ jobs:
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      -
-        name: Build
-        uses: docker/build-push-action@v4
+      # -
+      #   name: Build
+      #   uses: docker/build-push-action@v4
+      #   with:
+      #     context: .
+      #     file: ./Dockerfile
+      #     push: true
+      #     tags: lesson/clockbox:latest
+
+      - name: Build from Dockerfile
+        id: build-image
+        uses: redhat-actions/buildah-build@v2
         with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: lesson/clockbox:latest
+          image: ${{ env.APP_NAME }}
+          tags: ${{ env.IMAGE_TAGS }}
+
+          # If you don't have a Dockerfile/Containerfile, refer to https://github.com/redhat-actions/buildah-build#scratch-build-inputs
+          # Or, perform a source-to-image build using https://github.com/redhat-actions/s2i-build
+          # Otherwise, point this to your Dockerfile/Containerfile relative to the repository root.
+          dockerfiles: |
+            ./Dockerfile
