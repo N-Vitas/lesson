@@ -10,9 +10,10 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
-      - name: Checkout
+      - name: Build and Deploy
         run: |
           sudo docker build . --file Dockerfile --tag nvitas/lesson:$GITHUB_SHA
+          sudo docker run -rm -p 8000:8000 nvitas/lesson:$GITHUB_SHA
       # -
       #   # Add support for more platforms with QEMU (optional)
       #   # https://github.com/docker/setup-qemu-action
