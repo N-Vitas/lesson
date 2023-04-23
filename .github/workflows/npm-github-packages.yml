@@ -27,7 +27,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          image: lesson
+          image: nvitas/lesson
           tags: 1.0
 
       # - name: Build from Dockerfile
