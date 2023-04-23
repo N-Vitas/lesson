@@ -22,13 +22,14 @@ jobs:
         uses: docker/setup-buildx-action@v2
       -
         name: Build
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v3
         with:
           context: .
           file: ./Dockerfile
-          push: true
+          push: false
           image: nvitas/lesson
           tags: 1.0
+          outputs: type=image,push=false
 
       # - name: Build from Dockerfile
       #   id: build-image
