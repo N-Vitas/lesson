@@ -33,8 +33,8 @@ jobs:
         id: build-image
         uses: redhat-actions/buildah-build@v2
         with:
-          image: ${{ env.APP_NAME }}
-          tags: ${{ env.IMAGE_TAGS }}
+          image: lesson
+          tags: 1.0
 
           # If you don't have a Dockerfile/Containerfile, refer to https://github.com/redhat-actions/buildah-build#scratch-build-inputs
           # Or, perform a source-to-image build using https://github.com/redhat-actions/s2i-build
