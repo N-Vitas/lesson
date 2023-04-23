@@ -12,8 +12,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build and Deploy
         run: |
-          docker build -t nvitas/lesson:$GITHUB_SHA .
-          docker run --rm -f -d -p 8000:8000 nvitas/lesson:$GITHUB_SHA
+          docker-compose build
+          docker-compose up -d
       # -
       #   # Add support for more platforms with QEMU (optional)
       #   # https://github.com/docker/setup-qemu-action
