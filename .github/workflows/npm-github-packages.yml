@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Checkout
         run: |
-          docker build . --file Dockerfile --tag nvitas/lesson:$GITHUB_SHA
+          sudo docker build . --file Dockerfile --tag nvitas/lesson:$GITHUB_SHA
       # -
       #   # Add support for more platforms with QEMU (optional)
       #   # https://github.com/docker/setup-qemu-action
