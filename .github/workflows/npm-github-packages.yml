@@ -6,29 +6,30 @@ name: Build Container
 on: push
 
 jobs:
-  buildx:
+  build:
     runs-on: self-hosted
     steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v3
-      -
-        # Add support for more platforms with QEMU (optional)
-        # https://github.com/docker/setup-qemu-action
-        name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      -
-        name: Build
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          file: ./Dockerfile
-          push: false
-          tags: nvitas/lesson:1.0
-          outputs: type=image,push=false
+      - uses: actions/checkout@v2
+      - name: Checkout
+        run: |
+          echo "docker build . --file Dockerfile --tag nvitas/lesson:$GITHUB_SHA
+      # -
+      #   # Add support for more platforms with QEMU (optional)
+      #   # https://github.com/docker/setup-qemu-action
+      #   name: Set up QEMU
+      #   uses: docker/setup-qemu-action@v2
+      # -
+      #   name: Set up Docker Buildx
+      #   uses: docker/setup-buildx-action@v2
+      # -
+      #   name: Build
+      #   uses: docker/build-push-action@v3
+      #   with:
+      #     context: .
+      #     file: ./Dockerfile
+      #     push: false
+      #     tags: nvitas/lesson:1.0
+      #     outputs: type=image,push=false
 
       # - name: Build from Dockerfile
       #   id: build-image
